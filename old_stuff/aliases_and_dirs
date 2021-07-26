@@ -1,0 +1,10 @@
+C:\Users\kschwartz\Desktop\extra_stuff_i_guess\state-py3>
+
+DOB = {WindowsPath} C:\Users\kschwartz\Desktop\extra_stuff_i_guess\state-py3\DOB_pic.png
+state_py3 = {WindowsPath} C:\Users\kschwartz\Desktop\extra_stuff_i_guess\state-py3
+#TODO: IMPORT CONSOLE OUTPUT TO PY FILE
+
+
+
+=$G2= "Norwalk GA 20"
+=$G2= "DANBURY GA 3"
