@@ -1,0 +1,18 @@
+#GOAL: create a chrome app that combines the functionality of pearls and of a sticky note apps. I want something that
+gives me a sticky note i can look at any time a certain keyword pops up (and ideally the ability to minimize
+or close those sticky notes
+
+SUBGOAL:find a way to allow a user to generbate sticky notes and store them in the variable sticky_note_vals
+SUBGOAL2": Allow the user to put a tag under those sticky notes and store it in the variable keyword_tag
+SUBGOAL 3:plug keyword_tag into a function that takes a list of keywords and highlights every occurance of them
+        on the webpage
+SUBGOAL2:grab the coordinates of each highlight and store it in the variable . keyword_loc
+SUBGOAL3: get a function sticky_placer(): that can be used to decide the position of a sticky notes, plug keyword_loc
+into it.
+SUBGOAL4:save the configuration of the sticky notes somehow, mainly size and color , within a dictionary
+that uses keywords as keys and size,color,and content as values. (size,color,and content should be variabilized into
+a blanket finished_sticky_note variable) That variable will be a value that is attached to each key
+SUBGOAL5: when the domain appears again, iterate through the list of keywords. For each keyword, take the associated
+sticky_note_vals. Plug the keywords and the sticky_note_val into sticky_placer and wait for the notes to pop up.
+
+
