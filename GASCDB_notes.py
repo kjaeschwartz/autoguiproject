@@ -47,7 +47,7 @@ def vend_eta(ETAdate):
     # pyperclip.paste()
     pyautogui.typewrite(ETAdate)
     time.sleep(.15)
-    pyautogui.press('tab')
+    pyautogui.press('tab',)
     time.sleep(.15)
     pyautogui.typewrite('Emailed to Palto Alto Police Department')
     time.sleep(.15)
