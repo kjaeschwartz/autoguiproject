@@ -12,6 +12,7 @@ import urllib.request
 import openpyxl
 from lxml import html
 import requests
+from bs4 import BeautifulSoup
 
 #TODO: UNABLE TO FIND ELEMENT ERROR IS BECAUSE THE PAGE IS DYNAMICALLY GENERATED, IM GONNA NEED TO USE THIS APPROACH https://iqss.github.io/dss-webscrape/web-scraping-approaches.html#dynamic-web-pages
 driver = webdriver.Chrome('chromedriver.exe')
@@ -87,7 +88,7 @@ def enter_ids(ids_list):
         pyautogui.press("enter")
     pyautogui.hotkey("ctrl","2")
 def copy_name():
-    output
+    # output
     # first_name = driver.find_element_by_css_selector('#h2 > tbody > tr:nth-child(2) > td:nth-child(1)')
     # first_name = driver.find_element(By.XPATH, '//*[@id="h2"]/tbody/tr[2]/td[1]')
     # first_name = driver.find_element(By.XPATH, '//*[@id="h2"]/tbody/tr[2]/td[1]')
@@ -129,16 +130,33 @@ def is_it_dynamic():
     re.findall("(.*?)", text)
     url = requests.get(currUrl)
     url.json()
-login()
+
+def bs4_request():
+    currhtml = driver.page_source
+    print(currhtml)
+    soup = BeautifulSoup(currhtml,"lxml")
+    firstnameselect = soup.select('#h2 > tbody > :nth-child(2) > :nth-child(1)')
+    print(firstnameselect)
+def javascriptTest():
+    jstest = "document.getElementById('h2');"
+    jstest_res = driver.execute_script(jstest)
+    print(jstest_res)
+
+# login()
 get_ids_vals = get_ids()
 ids_list = get_ids_vals[0]
 ids_wb = get_ids_vals[1]
 ids_list = ["213215288"]
 print(ids_list)
 enter_ids(ids_list)
+javascriptTest()
+bs4_request()
+# WebDriverWait(driver,2)
+# selectorfirst = driver.find_element_by_css_selector('#h2 > tbody > :nth-child(2) > :nth-child(1)')
+# print(selectorfirst)
 # testing_function()
 # ajax_requests()
-print(is_it_dynamic())
+# print(is_it_dynamic())
 # get_table_info(ids_wb)
 # copy_name()
 # element_attribute = "trg"
