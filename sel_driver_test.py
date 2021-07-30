@@ -3,6 +3,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.by import By
+from selenium.webdriver.chrome.options import Options
 import pyautogui
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 import webbrowser,time
@@ -13,6 +14,13 @@ import openpyxl
 from lxml import html
 import requests
 from bs4 import BeautifulSoup
+
+#imports for the pyppeteer test (will grab dynamic html that can be passed to bs4)
+from pyppeteer import launch
+import os
+import asyncio
+
+
 
 #TODO: UNABLE TO FIND ELEMENT ERROR IS BECAUSE THE PAGE IS DYNAMICALLY GENERATED, IM GONNA NEED TO USE THIS APPROACH https://iqss.github.io/dss-webscrape/web-scraping-approaches.html#dynamic-web-pages
 driver = webdriver.Chrome('chromedriver.exe')
@@ -29,7 +37,6 @@ def ajax_requests():
     driver.execute_script("window.open('https://atm.accuratebackground.com/atm/findSearch.html')")
     log = driver.get_log('performance')
     return
-
 def next_tab():
     pyautogui.hotkey("ctrl","tab")
 def close_tab():
@@ -108,7 +115,14 @@ def print_all_available_elements():
     for ii in ids:
         # print ii.tag_name
         print(ii)  # id name as string
-def handle_dynamic_page():
+def sel_html_download_test(): #failed sel html download test.
+    # opts = Options()
+    # #opts.binary_location = "Users\kschwartz\PycharmProjects\pythonProject\chromedriver.exe"
+    # chrome_driver = os.getcwd() + "chromedriver.exe"
+    # driver2 = webdriver.Chrome(options=opts, executable_path="Users\kschwartz\PycharmProjects\pythonProject\chromedriver.exe")
+    # driver2.get(os.getcwd() + "/test.html")
+    # soup = BeautifulSoup(driver.page_source)
+    # print(soup.find(id="test").get_text())
     return
 def testing_function():
     global_dynamicUrl = "https://atm.accuratebackground.com/atm/selectSearchRequest.html"
@@ -130,7 +144,6 @@ def is_it_dynamic():
     re.findall("(.*?)", text)
     url = requests.get(currUrl)
     url.json()
-
 def bs4_request():
     currhtml = driver.page_source
     print(currhtml)
@@ -141,16 +154,22 @@ def javascriptTest():
     jstest = "document.getElementById('h2');"
     jstest_res = driver.execute_script(jstest)
     print(jstest_res)
+def main_body_commands():
+    login()
+    get_ids_vals = get_ids()
+    ids_list = get_ids_vals[0]
+    ids_wb = get_ids_vals[1]
+    ids_list = ["213215288"]
+    print(ids_list)
+    enter_ids(ids_list)
+    javascriptTest()
+    bs4_request()
 
-# login()
-get_ids_vals = get_ids()
-ids_list = get_ids_vals[0]
-ids_wb = get_ids_vals[1]
-ids_list = ["213215288"]
-print(ids_list)
-enter_ids(ids_list)
-javascriptTest()
-bs4_request()
+
+sel_html_download_test()
+# handle_dynamic_pyppet()
+#
+
 # WebDriverWait(driver,2)
 # selectorfirst = driver.find_element_by_css_selector('#h2 > tbody > :nth-child(2) > :nth-child(1)')
 # print(selectorfirst)
